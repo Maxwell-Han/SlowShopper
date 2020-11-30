@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getSingleProduct, addToCart} from '../store';
+import {getSingleProduct, addToCart, getCart} from '../store';
 import UpdateProductForm from './update-single-product';
 import {Link} from 'react-router-dom';
 
@@ -18,6 +18,7 @@ class SingleProduct extends React.Component {
     this.handleDecrement = this.handleDecrement.bind(this);
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
   async componentDidMount() {
@@ -49,6 +50,21 @@ class SingleProduct extends React.Component {
     this.setState(state => {
       return {itemQuantity: state.itemQuantity + 1};
     });
+  }
+
+  handleAddToCart() {
+    console.log(
+      'adding to cart ',
+      this.props.user.id,
+      this.props.product.id,
+      this.state.itemQuantity
+    );
+    this.props.addToCart(
+      this.props.user.id,
+      this.props.product.id,
+      this.state.itemQuantity
+    );
+    this.props.getCart(this.props.user.id);
   }
 
   render() {
@@ -103,13 +119,7 @@ class SingleProduct extends React.Component {
                         <button
                           type="button"
                           className="cardi_btn--block cardi_btn"
-                          onClick={() =>
-                            this.props.addToCart(
-                              user.id,
-                              product.id,
-                              itemQuantity
-                            )
-                          }
+                          onClick={this.handleAddToCart}
                         >
                           ADD TO CART
                         </button>
@@ -135,14 +145,16 @@ class SingleProduct extends React.Component {
 const mapState = state => {
   return {
     product: state.product,
-    user: state.user
+    user: state.user,
+    cart: state.order
   };
 };
 const mapDispatch = dispatch => {
   return {
     getSingleProduct: id => dispatch(getSingleProduct(id)),
     addToCart: (userId, productId, qty) =>
-      dispatch(addToCart(userId, productId, qty))
+      dispatch(addToCart(userId, productId, qty)),
+    getCart: userId => dispatch(getCart(userId))
   };
 };
 

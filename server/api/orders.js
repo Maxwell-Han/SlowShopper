@@ -86,6 +86,7 @@ router.put('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
       if (!req.session.cart) {
         req.session.cart = [];
       }
+
       let product = req.session.cart.find(
         p => p.lineItem && p.lineItem.productId === req.body.productId
       );
@@ -96,6 +97,12 @@ router.put('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
       }
       product.lineItem.quantity += req.body.quantity;
 
+      // remove items with 0 quantity
+      if (product.lineItem.quantity === 0) {
+        req.session.cart = req.session.cart.filter(
+          p => p.lineItem.productId !== req.body.productId
+        );
+      }
       res.json(product.lineItem);
       return;
     }
@@ -149,10 +156,23 @@ router.delete(
         if (!req.session.cart) {
           req.session.cart = [];
         }
-        const delIdx = req.session.cart.findIndex(
-          p => p.id === req.params.productId
+        let productId = parseInt(req.params.productId);
+        const delIdx = req.session.cart.findIndex(p => {
+          console.log(
+            'findIndex ',
+            typeof p.id,
+            typeof req.params.productId,
+            p.id === req.params.productId
+          );
+          return p.id === productId;
+        });
+        console.log(
+          'DELETING ITEM',
+          req.params.productId,
+          req.session.cart,
+          delIdx
         );
-        req.session.cart.splice(delIdx, 1, 1);
+        req.session.cart.splice(delIdx, 1);
         res.sendStatus(200);
         return;
       }

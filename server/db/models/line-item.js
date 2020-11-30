@@ -24,14 +24,6 @@ LineItem.prototype.withProductInfo = async function() {
 
 LineItem.prototype.validateInstock = async function() {
   const product = await Product.findByPk(this.productId, {raw: true});
-  console.log(
-    'line item is ',
-    product.name,
-    ' quanty is ',
-    this.quantity,
-    ' amt stock is ',
-    product.stock
-  );
   return this.quantity <= product.stock;
 };
 

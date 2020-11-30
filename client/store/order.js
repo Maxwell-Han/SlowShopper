@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import axios from 'axios';
 import history from '../history';
 import Swal from 'sweetalert2';
@@ -75,6 +76,7 @@ export const addToCart = (userId, productId, quantity) => async dispatch => {
       productId,
       quantity
     });
+    console.log('added to cart  daata is ', res.data);
     dispatch(addedToCart(userId, res.data));
   } catch (err) {
     console.error(err);
@@ -117,8 +119,23 @@ export default function(state = [], action) {
     case DELETED_LINE_ITEM:
       return state.filter(item => item.id !== action.productId);
     case ADDED_TO_CART: {
-      const stateCopy = [...state];
+      const stateCopy = [];
+      let didRemove = false;
+      for (let i = 0; i < state.length; i++) {
+        let prod = state[i];
+        if (
+          prod.id === action.lineItem.productId &&
+          action.lineItem.quantity === 0
+        ) {
+          didRemove = true;
+          continue;
+        }
+        stateCopy.push({...prod});
+      }
+      if (didRemove) return stateCopy;
+
       const product = stateCopy.find(p => p.id === action.lineItem.productId);
+      // remove item if qty is 0
       if (product) {
         if (action.lineItem.quantity <= product.stock) {
           product.hasIssue = false;
@@ -129,7 +146,6 @@ export default function(state = [], action) {
           product.issueText =
             'Desired amount greater than stock.  Please update order';
         }
-
         product.lineItem = action.lineItem;
       }
       return stateCopy;
