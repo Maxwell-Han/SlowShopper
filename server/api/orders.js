@@ -158,20 +158,8 @@ router.delete(
         }
         let productId = parseInt(req.params.productId);
         const delIdx = req.session.cart.findIndex(p => {
-          console.log(
-            'findIndex ',
-            typeof p.id,
-            typeof req.params.productId,
-            p.id === req.params.productId
-          );
           return p.id === productId;
         });
-        console.log(
-          'DELETING ITEM',
-          req.params.productId,
-          req.session.cart,
-          delIdx
-        );
         req.session.cart.splice(delIdx, 1);
         res.sendStatus(200);
         return;

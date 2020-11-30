@@ -52,19 +52,13 @@ class SingleProduct extends React.Component {
     });
   }
 
-  handleAddToCart() {
-    console.log(
-      'adding to cart ',
+  async handleAddToCart() {
+    await this.props.addToCart(
       this.props.user.id,
       this.props.product.id,
       this.state.itemQuantity
     );
-    this.props.addToCart(
-      this.props.user.id,
-      this.props.product.id,
-      this.state.itemQuantity
-    );
-    this.props.getCart(this.props.user.id);
+    await this.props.getCart(this.props.user.id);
   }
 
   render() {
@@ -145,8 +139,7 @@ class SingleProduct extends React.Component {
 const mapState = state => {
   return {
     product: state.product,
-    user: state.user,
-    cart: state.order
+    user: state.user
   };
 };
 const mapDispatch = dispatch => {

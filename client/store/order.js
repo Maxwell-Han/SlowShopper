@@ -38,6 +38,7 @@ const checkedOut = userId => ({
  */
 
 export const getCart = userId => async dispatch => {
+  console.log('store getting cart');
   try {
     const res = await axios.get(`/api/orders/cart/${userId}`);
     dispatch(gotCart(res.data));
