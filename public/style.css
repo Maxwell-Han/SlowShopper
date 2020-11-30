@@ -9,6 +9,7 @@ html {
 }
 
 body {
+  height: 100vh;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #999999;
   font-style: normal;
@@ -17,6 +18,10 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  height: 100%;
 }
 
 img {
@@ -83,6 +88,12 @@ button {
 
 button:hover {
   background-color: #990000;
+}
+
+.app-container {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 /**
