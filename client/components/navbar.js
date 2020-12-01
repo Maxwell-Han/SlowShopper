@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 // import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 // import SearchIcon from '@material-ui/icons/Search';
 // import TextField from '@material-ui/core/TextField';
@@ -8,15 +8,15 @@ import {Link} from 'react-router-dom';
 import {logout, getCart} from '../store';
 import SubMenu from './sub-menu';
 
-const Navbar = ({handleClick, isLoggedIn, user, cart, cartQt, getCart}) => {
-  useEffect(() => {
-    getCart(user.id);
-  }, []);
+const Navbar = ({handleClick, isLoggedIn, user, cart, getCart, cartQty}) => {
+  useEffect(
+    () => {
+      console.log('NAV BAR user id is ', user, user.id);
+      getCart(user.id);
+    },
+    [user.id]
+  );
 
-  const getCartCount = () =>
-    cart.map(item => item.lineItem.quantity).reduce((sum, q) => sum + q, 0);
-
-  const cartCount = getCartCount();
   return (
     <div>
       <div className="siteHeader">
@@ -34,7 +34,7 @@ const Navbar = ({handleClick, isLoggedIn, user, cart, cartQt, getCart}) => {
           <div className="siteHeader__section">
             {/* The navbar will show these links after you log in */}
             <div className="siteHeader__item siteHeaderButton">
-              <Link to="/cart">CART(0)</Link>
+              <Link to="/cart">{`CART(${cartQty})`}</Link>
             </div>
             <div className="siteHeader__item siteHeaderButton">
               <Link to={`/orders/${user.id}`}>My Orders</Link>
@@ -55,7 +55,7 @@ const Navbar = ({handleClick, isLoggedIn, user, cart, cartQt, getCart}) => {
             {/* The navbar will show these links before you log in */}
             <div className="siteHeader__section">
               <div className="siteHeader__item siteHeaderButton">
-                <Link to="/cart">{`CART(${cartCount})`}</Link>
+                <Link to="/cart">{`CART(${cartQty})`}</Link>
               </div>
               <div className="siteHeader__item siteHeaderButton">
                 <Link to="/signup">Sign Up</Link>
@@ -79,7 +79,10 @@ const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
     user: state.user,
-    cart: state.order
+    cart: state.order,
+    cartQty: state.order
+      .map(item => item.lineItem.quantity)
+      .reduce((sum, q) => sum + q, 0)
   };
 };
 
@@ -88,7 +91,9 @@ const mapDispatch = dispatch => {
     handleClick() {
       dispatch(logout());
     },
-    getCart: userId => dispatch(getCart(userId))
+    getCart(userId) {
+      dispatch(getCart(userId));
+    }
   };
 };
 
