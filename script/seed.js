@@ -63,14 +63,6 @@ async function seed() {
       stock: 11
     }),
     Product.create({
-      name: 'Corona Blocker 3000',
-      imageUrl: '/img/coronablocker3000.jpg',
-      description:
-        'Receive maximum protection from this high quality Corona Blocker mask! Manufactured in Wuhan, China, every mask has been human-tested in factory for Quality Assurance. 50% off for a limited time! (NOTE: for international orders, product will arrive in discreet unmarked packaging)',
-      price: 21499,
-      stock: 385
-    }),
-    Product.create({
       name: 'Sloth Leaf',
       imageUrl: '/img/leaf.jpg',
       description:
@@ -344,13 +336,6 @@ async function seed() {
       stock: 20
     }),
     Product.create({
-      name: "Don't eat me iPhone Case",
-      imageUrl: '/img/bat.png',
-      description: 'Don t eat me, bat may cause corona virus',
-      price: 1500,
-      stock: 30
-    }),
-    Product.create({
       name: 'Travel Mug',
       imageUrl: '/img/cough-travel-mug.png',
       description:
@@ -421,12 +406,10 @@ async function seed() {
   const virusItems = [
     'Sloth Mask',
     'Coronal Virus COVID-19 Vaccine',
-    'Corona Blocker 3000',
     'Official Scrabble - Limited Edition!',
     'Corona Virus Will Save The Planet Tote',
     'Corona Virus Made By Humans Tote',
     'How to protect yourself from Corona Virus',
-    "Don't eat me iPhone Case",
     'Iconic Corona Beer MEME',
     'Sloth Corona Sticker',
     'Monkey Corona Sticker',
