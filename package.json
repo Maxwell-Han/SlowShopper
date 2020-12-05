@@ -17,6 +17,7 @@
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
+    "seed-aws": "NODE_ENV='AWS' node script/seed.js",
     "scripts": {
       "commit": "git-cz"
     },
