@@ -1,6 +1,9 @@
 'use strict';
 
 const db = require('../server/db');
+
+if (process.env.NODE_ENV === 'AWS') require('../secrets.js');
+
 const {
   User,
   Product,
