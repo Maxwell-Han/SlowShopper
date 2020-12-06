@@ -1,8 +1,5 @@
 'use strict';
-
 const db = require('../server/db');
-
-if (process.env.NODE_ENV === 'AWS') require('../secrets.js');
 
 const {
   User,
@@ -13,6 +10,7 @@ const {
 } = require('../server/db/models');
 
 async function seed() {
+  console.log('db syncing');
   await db.sync({force: true});
   console.log('db synced!');
 
