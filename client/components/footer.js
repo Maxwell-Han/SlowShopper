@@ -11,7 +11,7 @@ const Footer = () => (
           </Link>
         </div>
         <div className="siteHeader__logo">
-          <Link to="/home">Slothpper</Link>
+          <Link to="/home">The Slow Shopper</Link>
         </div>
       </div>
       <div className="siteHeader__section">
