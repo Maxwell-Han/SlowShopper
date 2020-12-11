@@ -57,7 +57,7 @@ async function seed() {
         stock: 197
       }),
       Product.create({
-        name: 'Coronal Virus COVID-19 Vaccine',
+        name: 'Corona Virus COVID-19 Vaccine',
         imageUrl: '/img/vaccine.jpg',
         description:
           'Protect yourself and your sloth from the harmful Corona Virus with this affordable and exclusive patented vaccine! Our proprietary techology is the best at blocking the corona virus with counter virals that embed directly into the skin for maximum coverage. We do NOT accept any insurance!!!!',
