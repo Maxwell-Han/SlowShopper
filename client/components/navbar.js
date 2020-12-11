@@ -27,7 +27,7 @@ const Navbar = ({handleClick, isLoggedIn, user, cart, getCart, cartQty}) => {
             </Link>
           </div>
           <div className="siteHeader__logo">
-            <Link to="/home">Slothpper</Link>
+            <Link to="/home">The Slow Shopper</Link>
           </div>
         </div>
         {isLoggedIn ? (
