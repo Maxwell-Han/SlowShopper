@@ -16,7 +16,7 @@ const Footer = () => (
       </div>
       <div className="siteHeader__section">
         <div className="siteHeader__item siteHeaderFooter">
-          {'Copyright © Slothpper '}
+          {'Copyright © The Slow Shopper '}
           {new Date().getFullYear()}
         </div>
       </div>
