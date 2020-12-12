@@ -11,12 +11,12 @@ const Footer = () => (
           </Link>
         </div>
         <div className="siteHeader__logo">
-          <Link to="/home">Slothpper</Link>
+          <Link to="/home">The Slow Shopper</Link>
         </div>
       </div>
       <div className="siteHeader__section">
         <div className="siteHeader__item siteHeaderFooter">
-          {'Copyright © Slothpper '}
+          {'Copyright © The Slow Shopper '}
           {new Date().getFullYear()}
         </div>
       </div>

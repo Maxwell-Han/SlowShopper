@@ -5,7 +5,8 @@ import Routes from './routes';
 
 const App = () => {
   return (
-    <div>
+    // STYLE the container to a grid!
+    <div className="app-container">
       <Navbar />
       <Routes />
       <Footer />

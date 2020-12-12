@@ -17,12 +17,11 @@
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
     "seed": "node script/seed.js",
-    "scripts": {
-      "commit": "git-cz"
-    },
+    "seed-aws": "NODE_ENV='AWS' node script/seed.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
+    "start-prod": "NODE_ENV='AWS' npm run build-client & NODE_ENV='AWS' npm run start-server",
     "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
   },
   "husky": {
@@ -49,7 +48,7 @@
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "compression": "^1.7.3",
-    "connect-session-sequelize": "^6.0.0",
+    "connect-session-sequelize": "^7.0.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.15.1",
@@ -58,8 +57,8 @@
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
-    "pg": "^7.9.0",
-    "pg-hstore": "^2.3.2",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
     "prop-types": "^15.7.2",
     "query-string": "^6.11.1",
     "react": "^16.8.6",
@@ -70,7 +69,7 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "sequelize": "^5.15.1",
+    "sequelize": "^6.3.5",
     "socket.io": "^2.2.0",
     "stripe": "^8.29.0",
     "sweetalert": "^2.1.2",
